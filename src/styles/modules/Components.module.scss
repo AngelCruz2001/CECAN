@@ -1,0 +1,32 @@
+@use "../colors";
+.button {
+    background-color: transparent;
+    border: none;
+    color: colors.$primary;
+    cursor: pointer;
+    width: 100%;
+    margin: auto;
+}
+
+.actions {
+    display: flex;
+    svg {
+        color: colors.$color-gray;
+        transition: all 0.3s ease;
+        &:hover {
+            color: colors.$primary;
+        }
+    }
+}
+
+.buttonDetails {
+    background-color: colors.$secondary;
+    color: colors.$color-white;
+    border-radius: 1rem;
+    height: 100%;
+    width: 70%;
+    transition: all 0.3s ease;
+    &:hover {
+        background-color: colors.$primary;
+    }
+}

@@ -1,0 +1,12 @@
+@use "../../styles/abstracts/variables";
+@use "../../styles/colors";
+.titleScreen {
+    padding-left: calc(variables.$sidebar-width + 5rem);
+    padding-bottom: 3rem;
+    color: colors.$primary;
+    font-size: variables.$title-font-size;
+    font-weight: bold;
+    height: 13rem;
+    display: flex;
+    align-items: flex-end;
+}

@@ -1,0 +1,13 @@
+@use "../colors";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: colors.$color-white;
+}
+
+.content {
+    display: flex;
+}

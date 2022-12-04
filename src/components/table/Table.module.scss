@@ -1,0 +1,46 @@
+@use "../../styles/colors";
+@use "../../styles/abstracts/variables";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 0 6rem 0 0;
+    overflow: auto;
+}
+
+.headers {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+    border-bottom: solid 1px colors.$color-gray;
+    font-weight: bold;
+    min-width: 90rem;
+}
+
+.headerItem,
+.cell {
+    font-size: variables.$h3-font-size;
+    height: 3rem;
+}
+
+.body {
+    min-width: 90rem;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-top: 2rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+}
+
+.cell {
+    height: 3rem;
+    color: colors.$color-gray;
+    font-weight: 300;
+}

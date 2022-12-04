@@ -1,0 +1,93 @@
+@use "./colors";
+@use "./abstracts/mixins";
+@use "./abstracts/variables";
+@import "fonts";
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    font-size: 62.5%; // 1rem == 10px
+
+    @include mixins.respond(tab-port) {
+        font-size: 50%; // 1rem == 8px
+    }
+
+    @include mixins.respond(tab-land) {
+        font-size: 56.25%; // 1rem == 9px
+    }
+
+    @include mixins.respond(big-desk) {
+        font-size: 75%; // 1rem == 12px, 12/16
+    }
+
+    font-family: variables.$font-body;
+    scroll-behavior: smooth;
+    @include mixins.scrollBar(5px);
+    color: colors.$text-primary;
+}
+
+html {
+    background-color: white;
+}
+
+// html {
+//     box-sizing: border-box;
+//     padding: 0;
+//     margin: 0;
+// }
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5 {
+// font-family: variables.$font-body;
+// }
+
+h1 {
+    font-size: variables.$h1-font-size;
+}
+
+h2 {
+    font-size: variables.$h2-font-size;
+}
+
+h3 {
+    font-size: variables.$h3-font-size;
+}
+
+p,
+span,
+a,
+label {
+    font-size: 1.8rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+button,
+input {
+    border: none;
+    font-family: inherit;
+    font-size: variables.$login-input-font-size;
+
+    &:focus {
+        outline: none;
+    }
+}

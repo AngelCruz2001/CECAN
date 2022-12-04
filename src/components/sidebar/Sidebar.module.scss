@@ -1,0 +1,54 @@
+@use "../../styles/abstracts/variables";
+@use "../../styles/colors";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: variables.$sidebar-width;
+    height: 100%;
+    background-color: colors.$color-white;
+    overflow: hidden;
+    gap: 3.5rem;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem 3rem;
+    position: relative;
+}
+
+.icon,
+.item {
+    color: colors.$secondary;
+    font-size: variables.$h2-font-size;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        color: colors.$primary;
+        svg {
+            color: colors.$primary;
+        }
+    }
+}
+
+.icon {
+    font-size: 3.5rem;
+}
+
+.active {
+    color: colors.$primary;
+    svg {
+        color: colors.$primary;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        left: 1rem;
+        width: 0.5rem;
+        height: 75%;
+        background-color: colors.$primary;
+    }
+}

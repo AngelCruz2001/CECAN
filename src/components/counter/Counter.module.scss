@@ -1,0 +1,17 @@
+.counter {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    button, span {
+        background-color: #F3F3F3;
+        transition: all 0.2s ease-in-out;
+        flex: 1;
+    }
+
+    button:hover {
+        background-color: #E0E0E0;
+    }
+}

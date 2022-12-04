@@ -1,0 +1,54 @@
+@use "../../styles/colors";
+@use "../../styles/abstracts/variables";
+.topBar {
+    height: 8rem;
+    background-color: colors.$secondary;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.logos {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+.image {
+    width: 8rem;
+    height: 8rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: colors.$color-white;
+    font-weight: 500;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    color: colors.$color-white;
+    h2 {
+        font-size: variables.$h2-font-size;
+    }
+    svg {
+        font-size: 3rem;
+        color: colors.$color-white;
+        transition: all 0.3s ease;
+    }
+    transition: all 0.3s ease;
+    // &:hover {
+    //     color: colors.$color-gray;
+    //     svg {
+    //         color: colors.$color-gray;
+    //     }
+    // }
+}
