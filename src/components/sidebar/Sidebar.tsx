@@ -2,7 +2,12 @@ import React, { FC } from "react";
 import styles from "./Sidebar.module.scss";
 import { SidebarItem } from "./SidebarItem";
 import {
+  faBoxesStacked,
+  faClipboardCheck,
+  faFilePrescription,
+  faLaptopMedical,
   faPrescriptionBottleMedical,
+  faShop,
   faSquarePlus,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,14 +18,37 @@ export const Sidebar: FC<Props> = () => {
     {
       icon: faPrescriptionBottleMedical,
       text: "Cátalogo",
-      active: false,
-      onClick: () => console.log("Cátalogo"),
+      path: "catalogoFarmacia",
     },
     {
       icon: faSquarePlus,
       text: "Añadir medicamento",
-      active: false,
-      onClick: () => console.log("Cátalogo"),
+      path: "",
+    },
+    {
+      icon: faFilePrescription,
+      text: "Generar receta",
+      path: "generarReceta",
+    },
+    {
+      icon: faClipboardCheck,
+      text: "Historial de recetas",
+      path: "historial",
+    },
+    {
+      icon: faShop,
+      text: "Solicitudes",
+      path: "almacen",
+    },
+    {
+      icon: faBoxesStacked,
+      text: "Lista de almacen",
+      path: "listaAlmacen",
+    },
+    {
+      icon: faLaptopMedical,
+      text: "Activo fijo",
+      path: "activoFijo",
     },
   ];
 
@@ -31,8 +59,7 @@ export const Sidebar: FC<Props> = () => {
           key={item.text}
           icon={item.icon}
           text={item.text}
-          active={item.active}
-          onClick={item.onClick}
+          path={item.path}
         />
       ))}
     </div>

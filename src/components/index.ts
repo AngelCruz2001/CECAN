@@ -5,3 +5,4 @@ export * from "./table";
 export * from "./prescription";
 export * from "./medicines";
 export * from "./print";
+export * from "./addMedicineButton";

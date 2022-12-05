@@ -5,17 +5,19 @@ import {
 } from "interfaces/IMedicineStock.interface";
 import { ITable } from "interfaces/ITable.interface";
 import { dataPharmacy } from "resources/data";
-import { IAlmacen } from "../../interfaces/IAlmacen.interface";
+import { IAlmacen, IAlmacenStore } from "../../interfaces/IAlmacen.interface";
 
 export interface IRequestsState {
   requests: IAlmacen[] | null;
   activeRequest: IAlmacen | null;
+  inventory: IAlmacenStore[] | null;
   loading: boolean;
 }
 
 const initialState: IRequestsState = {
-  requests: dataPharmacy.historialRequests,
+  requests: null,
   activeRequest: null,
+  inventory: null,
   loading: false,
 };
 
@@ -29,8 +31,11 @@ export const requestsSlice = createSlice({
     setActiveRequest: (state, action: PayloadAction<IAlmacen>) => {
       state.activeRequest = action.payload;
     },
+    setInventory: (state, action: PayloadAction<IAlmacenStore[]>) => {
+      state.inventory = action.payload;
+    }
   },
   extraReducers: (builder) => {},
 });
 
-export const { setActiveRequest, setRequests } = requestsSlice.actions;
+export const { setActiveRequest, setRequests, setInventory } = requestsSlice.actions;

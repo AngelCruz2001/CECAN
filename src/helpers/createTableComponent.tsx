@@ -21,7 +21,6 @@ interface TableComponentDetails extends IOnClick {
 
 export const createTableComponent = (details: TableComponentDetails) => {
   const { type, content, onClick, onClick2, id } = details;
-  console.log(content);
   switch (type) {
     case "TEXT":
       return <p key={id}>{content}</p>;
@@ -50,11 +49,11 @@ export const createTableComponent = (details: TableComponentDetails) => {
     case "ACTIONS-P-E-D":
       return (
         <div className={styles.actions}>
-          <Print id={parseInt(id)} />
-          <button className={styles.button} onClick={() => onClick(id)}>
+          <Print id={id} />
+          {/* <button className={styles.button} onClick={() => onClick(id)}>
             <FontAwesomeIcon icon={faPenToSquare} />
-          </button>
-          <button className={styles.button} onClick={() => onClick2!(id)}>
+          </button> */}
+          <button className={styles.button} onClick={() => onClick(id)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>

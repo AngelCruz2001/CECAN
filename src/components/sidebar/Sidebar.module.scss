@@ -7,16 +7,24 @@
     width: variables.$sidebar-width;
     height: 100%;
     background-color: colors.$color-white;
-    overflow: hidden;
-    gap: 3.5rem;
+    gap: 2rem;
+    overflow: auto;
+    max-height: 40rem;
+
+    &::-webkit-scrollbar {
+        width: 0.5rem;
+    }
 }
 
 .item {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    padding: 1rem 3rem;
+    padding: 1rem 0;
     position: relative;
+    .icon {
+        width: 20%;
+        display: flex;
+    }
 }
 
 .icon,
@@ -46,7 +54,7 @@
     &::after {
         content: "";
         position: absolute;
-        left: 1rem;
+        right: 105%;
         width: 0.5rem;
         height: 75%;
         background-color: colors.$primary;

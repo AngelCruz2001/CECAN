@@ -6,12 +6,18 @@ import { NextPage } from "next";
 import styles from "styles/modules/PharmacyCatalog.module.scss";
 import { setPharmacyData } from "store/pharmacy/pharmacySlice";
 import { dataPharmacy } from "resources/data";
+import { startGetPharmacyData } from "../../store/pharmacy/thunks";
+import { ITable } from '../../interfaces/ITable.interface';
 
 const PharmacyCatalog: NextPage = (props) => {
   const { pharmacyData } = useAppSelector((state) => state.pharmacy);
   const dispatch = useAppDispatch();
 
-  const tableInformation = {
+  useEffect(() => {
+    dispatch(startGetPharmacyData());
+  }, []);
+
+  const tableInformation:ITable = {
     headers: [
       { id: "lot_number", label: "Lote" },
       { id: "name", label: "Nombre" },
@@ -29,6 +35,9 @@ const PharmacyCatalog: NextPage = (props) => {
       "center",
       "center",
     ] as CanvasTextAlign[],
+    onClick: (id: string) => {
+      console.log(id);
+    },
   };
 
   return (

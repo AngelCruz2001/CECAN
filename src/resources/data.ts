@@ -112,4 +112,19 @@ export const dataPharmacy = {
       status: "Pendiente",
     },
   ],
+  inventory: [
+    {
+      key: "132123112",
+      genericName: "Ibuprofeno",
+      presentation: "Tabletas",
+      quantity_per_unit: 10,
+    }, 
+    {
+      key: "132123113",
+      genericName: "Paracetamol",
+      presentation: "Tabletas",
+      quantity_per_unit: 10,
+    },
+  ]
+
 };

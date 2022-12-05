@@ -4,25 +4,21 @@ import styles from "./Counter.module.scss";
 type Props = {
   initialValue: number;
   id: string;
-  onChange: (id: string, initialValue: number) => void;
+  onChange: (key: string, quantity: number) => void;
 };
 export const Counter: FC<Props> = ({ id, initialValue, onChange }) => {
-  const [counter, setCounter] = useState(initialValue);
-
   const handleIncrement = () => {
-    setCounter(counter + 1);
-    onChange(id, counter + 1);
+    onChange(id, initialValue + 1);
   };
 
   const handleDecrement = () => {
-    setCounter(counter - 1);
-    onChange(id, counter - 1);
+    onChange(id, initialValue - 1);
   };
 
   return (
-    <div className={styles.counter}>
+    <div className={styles.counter} key={id}>
       <button onClick={handleDecrement}>-</button>
-      <span>{counter}</span>
+      <span>{initialValue}</span>
       <button onClick={handleIncrement}>+</button>
     </div>
   );

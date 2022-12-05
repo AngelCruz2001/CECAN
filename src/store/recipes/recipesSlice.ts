@@ -13,7 +13,7 @@ export interface IPharmacyState {
 
 const initialState: IPharmacyState = {
   medicines: null,
-  activeMedicines: [{ key: "1", name: "Paracetamol", quantity: 10 }],
+  activeMedicines: null,
   activeIndication: null,
   loading: false,
 };
@@ -47,19 +47,34 @@ export const recipesSlice = createSlice({
       );
       if (medicine) {
         medicine.quantity = quantity;
+
+        if (medicine.quantity <= 0 && state.activeMedicines) {
+          state.activeMedicines = state.activeMedicines.filter(
+            (medicine) => medicine.key !== key
+          );
+        }
       }
     },
-    addActiveMedicine: (state, action: PayloadAction<string>) => {
-      const medicine = state.medicines?.find(
-        (medicine) => medicine.key === action.payload
+    addActiveMedicine: (state, action: PayloadAction<IMedicineCatalog>) => {
+      const medicineAlreadyInRecipe = state.activeMedicines?.find(
+        (medicine) => medicine.key === action.payload.key
       );
-
-      if (medicine) {
-        state.activeMedicines?.push({
-          key: medicine.key,
-          name: medicine.name,
-          quantity: 1,
-        });
+      if (medicineAlreadyInRecipe) {
+        medicineAlreadyInRecipe.quantity += 1;
+      } else {
+        state.activeMedicines
+          ? state.activeMedicines.push({
+              key: action.payload.key,
+              name: action.payload.name,
+              quantity: 1,
+            })
+          : (state.activeMedicines = [
+              {
+                key: action.payload.key,
+                name: action.payload.name,
+                quantity: 1,
+              },
+            ]);
       }
     },
   },
@@ -72,5 +87,5 @@ export const {
   setActiveIndication,
   modifyActiveMedicinesQuantity,
   addActiveMedicine,
-  removeActiveMedicine, 
+  removeActiveMedicine,
 } = recipesSlice.actions;

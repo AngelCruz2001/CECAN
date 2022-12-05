@@ -4,3 +4,10 @@ export interface IAlmacen {
   name: string;
   status: string;
 }
+
+export interface IAlmacenStore {
+  key: string;
+  genericName: string;
+  presentation: string;
+  quantity_per_unit: number;
+}

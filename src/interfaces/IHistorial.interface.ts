@@ -4,9 +4,9 @@ export interface IHistorial {
 
 export interface IPrescriptionHistory {
   folio: number;
+  id: string;
   patient_name: string;
   observations: string;
   instructions: string;
-  created_at: string;
-  supplied_at: string;
+  status: string;
 }

@@ -6,16 +6,23 @@ import {
   removeActiveMedicine,
   setActiveIndication,
 } from "store/recipes/recipesSlice";
-import { useAppDispatch } from "../../hooks/hooks";
-import { Table } from "components";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { AddMedicineButton, Table } from "components";
 
 import styles from "./Prescription.module.scss";
-
-type Props = {
-  activeMedicines: IMedicine[] | null;
-};
-export const GeneratePrescription: FC<Props> = ({ activeMedicines }) => {
+import { PickAMedicine } from "./PickAMedicine";
+import { toggleModal } from "store/ui/uiSlice";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { startGenerateRecipe } from "store/recipes/thunks";
+import { startGetMedicines } from "../../store/recipes/thunks";
+export const GeneratePrescription: FC = () => {
   const dispatch = useAppDispatch();
+
+  const {
+    recipes: { activeMedicines, medicines, activeIndication },
+    ui: { isModalOpen },
+  } = useAppSelector((state) => state);
 
   const tableElements: ITable = {
     headers: [
@@ -35,29 +42,68 @@ export const GeneratePrescription: FC<Props> = ({ activeMedicines }) => {
       dispatch(removeActiveMedicine(key));
     },
   };
-  const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(setActiveIndication(e.target.value));
-  };
 
-  const handleGeneratePrescription = () => {
-    console.log("Prescription generated");
-    // TODO: Generate prescription
-  };
+  const openModal = () => dispatch(toggleModal());
+
+  useEffect(() => {
+    dispatch(startGetMedicines());
+  }, []);
+
+  const formik = useFormik({
+    initialValues: {
+      patientName: "",
+      indications: activeIndication,
+    },
+    validationSchema: Yup.object({
+      patientName: Yup.string().required("El nombre del paciente es requerido"),
+      indications: Yup.string().required("Las indicaciones son requeridas"),
+    }),
+    onSubmit: (values) => {
+      dispatch(
+        startGenerateRecipe({
+          instructions: values.indications!,
+          medicines: activeMedicines!,
+          observations: "",
+          patient_name: values.patientName,
+        })
+      );
+    },
+  });
+
   return (
     <>
       <Table {...tableElements} />
 
-      <div className={styles.indications}>
+      <AddMedicineButton showModal={openModal} />
+
+      {isModalOpen && (
+        <PickAMedicine
+          isModalOpen={isModalOpen}
+          activeMedicines={activeMedicines}
+          medicines={medicines}
+        />
+      )}
+
+      <form onSubmit={formik.handleSubmit} className={styles.indications}>
+        <input
+          className={styles.patientName}
+          type="text"
+          placeholder="Nombre del paciente"
+          name="patientName"
+          onChange={formik.handleChange}
+          value={formik.values.patientName}
+        />
         <textarea
           className={styles.textArea}
           placeholder="Indicaciones"
-          name="indication"
+          name="indications"
           cols={30}
           rows={10}
-          onChange={handleOnChange}
+          onChange={formik.handleChange}
+          value={formik.values.indications!}
         />
-        <button onClick={handleGeneratePrescription}>Generar Receta</button>
-      </div>
+        <button type="submit">Generar Receta</button>
+      </form>
     </>
   );
 };

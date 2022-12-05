@@ -1,0 +1,11 @@
+@use "../../styles/colors";
+
+.modal {
+    background-color: colors.$color-white;
+    // border-radius: $box-border-radius;
+    // @include boxShadow;
+    padding: 4rem;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+}

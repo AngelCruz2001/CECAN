@@ -11,6 +11,7 @@ export const Body: FC<ITable> = ({
   percentages,
   textDisplay,
   elements,
+  keyName = "key",
   onClick,
   onClick2,
 }) => {
@@ -21,7 +22,7 @@ export const Body: FC<ITable> = ({
         <div key={index} className={styles.row}>
           {headers.map(({ id }, index) => (
             <Cell
-              id={row.key}
+              id={row[keyName]}
               key={index}
               textDisplay={textDisplay ? textDisplay[index] : "start"}
               content={row[id]}

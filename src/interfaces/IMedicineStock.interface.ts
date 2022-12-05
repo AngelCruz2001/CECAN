@@ -3,8 +3,7 @@ export interface IMedicineStock {
   lot_number: string;
   name: string;
   expires_at: string;
-  pieces: string;
-  edit: string;
+  pieces: number;
 }
 
 export interface IMedicine {

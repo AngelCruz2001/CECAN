@@ -8,7 +8,7 @@ export interface IPharmacyState {
 }
 
 const initialState: IPharmacyState = {
-  pharmacyData: dataPharmacy.rows,
+  pharmacyData: null,
   loading: false,
 };
 

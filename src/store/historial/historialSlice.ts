@@ -12,7 +12,7 @@ export interface IHistorialState extends IHistorial {
 
 const initialState: IHistorialState = {
   loading: false,
-  prescriptions: dataPharmacy.historialPrescriptions,
+  prescriptions: null,
   activePrescription: null,
 };
 
@@ -26,14 +26,14 @@ export const historialSlice = createSlice({
     ) => {
       state.prescriptions = action.payload;
     },
-    setActivePrescriptionHistory: (state, action: PayloadAction<number>) => {
+    setActivePrescriptionHistory: (state, action: PayloadAction<string>) => {
       state.activePrescription = state.prescriptions!.find(
-        (prescription) => prescription.folio === action.payload
+        (prescription) => prescription.id === action.payload
       )!;
     },
-    deletePrescription: (state, action: PayloadAction<number>) => {
+    deletePrescription: (state, action: PayloadAction<string>) => {
       state.prescriptions = state.prescriptions!.filter(
-        (prescription) => prescription.folio !== action.payload
+        (prescription) => prescription.id !== action.payload
       );
     },
   },
