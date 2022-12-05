@@ -7,7 +7,7 @@ import styles from "styles/modules/PharmacyCatalog.module.scss";
 import { setPharmacyData } from "store/pharmacy/pharmacySlice";
 import { dataPharmacy } from "resources/data";
 import { startGetPharmacyData } from "../../store/pharmacy/thunks";
-import { ITable } from '../../interfaces/ITable.interface';
+import { ITable } from "../../interfaces/ITable.interface";
 
 const PharmacyCatalog: NextPage = (props) => {
   const { pharmacyData } = useAppSelector((state) => state.pharmacy);
@@ -17,17 +17,16 @@ const PharmacyCatalog: NextPage = (props) => {
     dispatch(startGetPharmacyData());
   }, []);
 
-  const tableInformation:ITable = {
+  const tableInformation: ITable = {
     headers: [
       { id: "lot_number", label: "Lote" },
       { id: "name", label: "Nombre" },
       { id: "expires_at", label: "Expira en" },
       { id: "pieces", label: "Cantidad" },
-      { id: "edit", label: "Editar" },
     ],
     rows: pharmacyData,
-    elements: ["TEXT", "TEXT", "TEXT", "TEXT", "EDIT-BUTTON"],
-    percentages: [20, 30, 20, 15, 15],
+    elements: ["TEXT", "TEXT", "TEXT", "TEXT"],
+    percentages: [35, 30, 20, 15],
     textDisplay: [
       "center",
       "center",

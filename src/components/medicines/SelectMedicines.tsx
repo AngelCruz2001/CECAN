@@ -28,44 +28,15 @@ export const SelectMedicines: FC<Props> = ({ medicines }) => {
     elements: ["TEXT", "TEXT", "ADD"],
     textDisplay: ["center", "center", "center"],
     onClick: (key: string) => {
-      dispatch(addActiveMedicine(key));
+      console.log("caca")
+      // dispatch(addActiveMedicine(key));
     },
   };
 
   return (
     <div className={styles.container}>
       <h2>Lista de medicamentos</h2>
-      {/* <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Clave</TableCell>
-              <TableCell align="right">Nombre</TableCell>
-              <TableCell align="right">Agregar</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {medicines?.map((medicine) => (
-              <TableRow
-                key={medicine.key}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {medicine.key}
-                </TableCell>
-                <TableCell align="right">{medicine.name}</TableCell>
-                <TableCell align="right">
-                  <button
-                    onClick={() => dispatch(addActiveMedicine(medicine.key))}
-                  >
-                    Agregar
-                  </button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer> */}
+    
 
       <Table {...tableElements} />
     </div>

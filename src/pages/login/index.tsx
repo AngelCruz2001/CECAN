@@ -1,16 +1,17 @@
 import { Field, FormikProvider, useFormik } from "formik";
 import styles from "styles/modules/Login.module.scss";
-import * as yup from "yup";
+import * as Yup from "yup";
 import { TopBar } from "components";
 import { useAppDispatch } from "hooks/hooks";
 import { startLogin } from "../../store/auth/thunks";
+import { NextPage } from "next";
 
-const validationSchema = yup.object({
-  username: yup.string().required("Requerido"),
-  password: yup.string().required("Requerido"),
+const validationSchema = Yup.object({
+  username: Yup.string().required("Requerido"),
+  password: Yup.string().required("Requerido"),
 });
 
-const login = () => {
+const Login: NextPage = () => {
   const dispatch = useAppDispatch();
 
   const formik = useFormik({
@@ -76,4 +77,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

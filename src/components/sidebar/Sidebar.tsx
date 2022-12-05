@@ -20,11 +20,11 @@ export const Sidebar: FC<Props> = () => {
       text: "Cátalogo",
       path: "catalogoFarmacia",
     },
-    {
-      icon: faSquarePlus,
-      text: "Añadir medicamento",
-      path: "",
-    },
+    // {
+    //   icon: faSquarePlus,
+    //   text: "Añadir medicamento",
+    //   path: "",
+    // },
     {
       icon: faFilePrescription,
       text: "Generar receta",

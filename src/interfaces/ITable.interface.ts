@@ -1,6 +1,6 @@
 import { IAlmacen, IAlmacenStore } from "./IAlmacen.interface";
 import { IHistorial, IPrescriptionHistory } from "./IHistorial.interface";
-import { IFixedAsset } from './IFixedAssest.interface';
+import { IFixedAsset } from "./IFixedAssest.interface";
 import {
   IMedicineStock,
   IMedicine,
@@ -37,12 +37,8 @@ interface ITHeaders {
 }
 
 export interface IOnClick {
-  onClick?:
-    | ((id: string) => void)
-    | ((key: number) => void)
-    | ((key: string, quantity: number) => void)
-    | ((id: string, initialValue: number) => void);
-  onClick2?: ((id: string) => void) | ((key: number, quantity: number) => void);
+  onClick?: any;
+  onClick2?: any;
 }
 
 type HeadersButtons =
