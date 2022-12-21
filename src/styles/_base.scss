@@ -92,3 +92,15 @@ input {
         outline: none;
     }
 }
+
+.modalContainer {
+    background-color: colors.$color-white;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: 40rem;
+    min-width: 40rem;
+    overflow: auto;
+    padding: 5rem;
+}

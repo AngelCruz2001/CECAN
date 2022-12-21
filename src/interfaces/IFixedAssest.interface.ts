@@ -1,3 +1,9 @@
+export interface IFixedAssetResponse {
+  data: {
+    fixed_assets: IFixedAsset[];
+  };
+}
+
 export interface IFixedAsset {
   id: string;
   description: string;

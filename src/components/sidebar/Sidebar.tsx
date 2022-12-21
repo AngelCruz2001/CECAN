@@ -20,11 +20,16 @@ export const Sidebar: FC<Props> = () => {
       text: "Cátalogo",
       path: "catalogoFarmacia",
     },
-    // {
-    //   icon: faSquarePlus,
-    //   text: "Añadir medicamento",
-    //   path: "",
-    // },
+    {
+      icon: faSquarePlus,
+      text: "Añadir medicina",
+      path: "nuevoCatalogo",
+    },
+    {
+      icon: faClipboardCheck,
+      text: "Añadir stocks",
+      path: "nuevoStock",
+    },
     {
       icon: faFilePrescription,
       text: "Generar receta",
@@ -49,6 +54,16 @@ export const Sidebar: FC<Props> = () => {
       icon: faLaptopMedical,
       text: "Activo fijo",
       path: "activoFijo",
+    },
+    {
+      icon: faSquarePlus,
+      text: "Añadir activo fijo",
+      path: "nuevoActivoFijo",
+    },
+    {
+      icon: faSquarePlus,
+      text: "Añadir departamento",
+      path: "nuevoDepartamento",
     },
   ];
 

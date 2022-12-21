@@ -19,6 +19,7 @@
     "axios": "^1.2.0",
     "downloadjs": "^1.4.7",
     "formik": "^2.2.9",
+    "fs.promises": "^0.1.2",
     "moment": "^2.29.4",
     "next": "12.2.2",
     "react": "18.2.0",

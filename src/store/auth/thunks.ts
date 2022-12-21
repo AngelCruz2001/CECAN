@@ -16,7 +16,6 @@ export const startLogin = ({
   username: string;
   password: string;
 }) => {
-  console.log("Caca");
   const req = cecanApi.post<IAuthResponse>("/auth/login", {
     username,
     password,
@@ -27,6 +26,8 @@ export const startLogin = ({
       loading: "Iniciando sesión...",
       error: "Hubo un error al iniciar sesión",
       success: ({ data: { data, ok } }: AxiosResponse<IAuthResponse>) => {
+        window.localStorage.setItem("token", data.token);
+
         dispatch(
           login({
             token: data.token,
@@ -40,8 +41,6 @@ export const startLogin = ({
             },
           })
         );
-        localStorage.setItem("token", data.token);
-        console.log(data.token);
         Router.push("/catalogoFarmacia");
         return `Bienvenido ${data.user.full_name}`;
       },

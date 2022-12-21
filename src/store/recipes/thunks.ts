@@ -1,4 +1,4 @@
-import cecanApi from "api/cecanApi";
+import cecanApi, { cecanApiPDF } from "api/cecanApi";
 import { Dispatch } from "redux";
 import { IPrescription } from "../../interfaces/IPrescription.interface";
 import download from "downloadjs";
@@ -6,36 +6,37 @@ import { setMedicines } from "./recipesSlice";
 import { IMedicinesResponse } from "../../interfaces/IMedicinesResponse.response.interface";
 import { toast } from "react-hot-toast";
 import { IPrescriptionResponse } from "../../interfaces/IPrescriptionsResponse.response.interface";
+import { Headers } from "../../components/table/Headers";
 import {
   deletePrescription,
   setPrescriptionHistory,
 } from "store/historial/historialSlice";
+import { URL } from "url";
 
 export const startGenerateRecipe =
   ({ patient_name, instructions, observations, medicines }: IPrescription) =>
   async (dispatch: Dispatch) => {
-    console.log("caca");
-
-    const response = await cecanApi.post("/prescriptions", {
-      patient_name,
-      observations,
-      instructions,
-      medicines: medicines.map(({ key, quantity }) => ({
-        medicine_key: key,
-        pieces: quantity,
-      })),
+    const res = await fetch("https://cecan-app.tk/api/v1/prescriptions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        patient_name,
+        instructions,
+        observations,
+        medicines: medicines.map((medicine) => ({
+          medicine_key: medicine.key,
+          pieces: medicine.quantity,
+        })),
+      }),
     });
 
-    if (response.status === 200) {
-      const { data } = response;
-      download(
-        new Blob([data], { type: "application/pdf" }),
-        "recipe.pdf",
-        "application/pdf"
-      );
-    }
-  };
+    const blob = await res.blob();
 
+    download(blob, "recipe.pdf", "application/pdf");
+  };
 export const startGetMedicines = () => async (dispatch: Dispatch) => {
   const {
     data: { data, ok },

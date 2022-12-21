@@ -1,0 +1,19 @@
+@use "../../styles/colors";
+@use "../../styles/abstracts/variables";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: colors.$color-white;
+}
+
+.content {
+    display: flex;
+    padding: 0 4rem;
+}
+
+.generate {
+    display: flex;
+    width: calc(100% - variables.$sidebar-width);
+    flex-direction: column;
+}

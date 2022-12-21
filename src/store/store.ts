@@ -1,4 +1,5 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { authSlice } from "./auth/authSlice";
 import { fixedAssetSlice } from "./fixedAsset/fixedAssetSlice";
 import { historialSlice } from "./historial/historialSlice";
 import { pharmacySlice } from "./pharmacy/pharmacySlice";
@@ -14,6 +15,7 @@ export const store = configureStore({
     historial: historialSlice.reducer,
     storehouse: requestsSlice.reducer,
     fixedAsset: fixedAssetSlice.reducer,
+    auth: authSlice.reducer,
   },
 });
 

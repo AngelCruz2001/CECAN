@@ -3,13 +3,14 @@ import { useAppDispatch, useAppSelector } from "hooks/hooks";
 import React, { useEffect } from "react";
 import { ITable } from "../../interfaces/ITable.interface";
 import styles from "styles/modules/GenerateRecipe.module.scss";
+import { startGetFixedAssests } from "store/fixedAsset/thunks";
 
 const FixedAsset = () => {
   const { fixedAssets } = useAppSelector((state) => state.fixedAsset);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // dispatch(startGetFixedAssests());
+    dispatch(startGetFixedAssests());
   }, []);
 
   const tableElements: ITable = {
@@ -22,9 +23,9 @@ const FixedAsset = () => {
     ],
     rows: fixedAssets,
     keyName: "folio",
-    percentages: [10, 30, 30, 15, 15],
+    percentages: [30, 20, 10, 15, 15],
     textDisplay: ["center", "center", "center", "center", "center"],
-    elements: ["TEXT", "TEXT", "TEXT", "TEXT", "DETAILS"],
+    elements: ["TEXT", "TEXT", "TEXT", "TEXT", "TEXT"],
     onClick: (id: number) => {
       console.log(id);
     },
@@ -33,7 +34,7 @@ const FixedAsset = () => {
   return (
     <div className={styles.container}>
       <TopBar />
-      <TitleScreen title="Solicitudes" />
+      <TitleScreen title="Activo fijo" />
       <div className={styles.content}>
         <Sidebar />
         <Table {...tableElements} />

@@ -20,14 +20,16 @@ const PharmacyCatalog: NextPage = (props) => {
   const tableInformation: ITable = {
     headers: [
       { id: "lot_number", label: "Lote" },
+      { id: "id", label: "ID medicina" },
       { id: "name", label: "Nombre" },
-      { id: "expires_at", label: "Expira en" },
+      { id: "expires_at", label: "Expira el" },
       { id: "pieces", label: "Cantidad" },
     ],
     rows: pharmacyData,
-    elements: ["TEXT", "TEXT", "TEXT", "TEXT"],
-    percentages: [35, 30, 20, 15],
+    elements: ["TEXT", "TEXT", "TEXT", "TEXT", "TEXT"],
+    percentages: [25, 20, 20, 20, 15],
     textDisplay: [
+      "center",
       "center",
       "center",
       "center",

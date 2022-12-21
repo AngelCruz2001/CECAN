@@ -50,9 +50,9 @@ export const createTableComponent = (details: TableComponentDetails) => {
       return (
         <div className={styles.actions}>
           <Print id={id} />
-          {/* <button className={styles.button} onClick={() => onClick(id)}>
+          <button className={styles.button} onClick={() => onClick(id)}>
             <FontAwesomeIcon icon={faPenToSquare} />
-          </button> */}
+          </button>
           <button className={styles.button} onClick={() => onClick(id)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>

@@ -58,3 +58,21 @@
         }
     }
 }
+
+@mixin input() {
+    background-color: transparent;
+    width: 500px;
+    height: 40px;
+    font-size: 2rem;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid $color-gray;
+    transition: all 0.4s ease-in-out;
+    outline: none;
+    &:-webkit-autofill,
+    &:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0 50px white inset;
+        box-shadow: 0 0 0 50px white inset;
+        -webkit-text-fill-color: #333;
+    }
+}

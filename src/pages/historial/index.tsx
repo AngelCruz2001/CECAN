@@ -13,6 +13,7 @@ import {
   startDeletePrescription,
   startGetHistorialPrescriptions,
 } from "store/recipes/thunks";
+import { Modal } from "@mui/material";
 
 const Historial: NextPage = () => {
   const { prescriptions, activePrescription } = useAppSelector(
@@ -38,6 +39,12 @@ const Historial: NextPage = () => {
     elements: ["TEXT", "TEXT", "TEXT", "TEXT", "ACTIONS-P-E-D"],
     textDisplay: ["center", "center", "center", "center", "center"],
     onClick: (id: string) => {
+      // Edit prescription
+
+      dispatch(setActivePrescriptionHistory(id));
+      console.log(id);
+    },
+    onClick2: (id: string) => {
       dispatch(startDeletePrescription(id));
     },
   };
@@ -49,6 +56,15 @@ const Historial: NextPage = () => {
       <div className={styles.content}>
         <Sidebar />
         <Table {...tableElements} />
+
+        {activePrescription && (
+          <Modal
+            open={activePrescription !== null}
+            onClose={() => dispatch(setActivePrescriptionHistory(null))}
+          >
+            <div className="modalContainer">asdfasdf</div>
+          </Modal>
+        )}
       </div>
     </div>
   );

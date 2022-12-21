@@ -6,3 +6,5 @@ export * from "./prescription";
 export * from "./medicines";
 export * from "./print";
 export * from "./addMedicineButton";
+export * from "./baseStructure";
+export * from "./forms";

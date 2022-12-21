@@ -1,5 +1,6 @@
 export interface IMedicineStock {
   key: string;
+  id: string;
   lot_number: string;
   name: string;
   expires_at: string;
