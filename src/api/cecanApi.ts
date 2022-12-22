@@ -13,7 +13,7 @@ export const getToken = () =>
 export const getAuthorizationHeader = () => `Bearer ${getToken()}`;
 
 export const cecanApiPDF = axios.create({
-  baseURL: "http://cecan-app.tk:4000/api/v1",
+  baseURL: "https://cecan-app.tk:4000/api/v1",
   headers: {
     responseType: "blob",
     // "Content-Type": "apllication/pdf",
@@ -22,7 +22,7 @@ export const cecanApiPDF = axios.create({
 });
 
 const cecanApi = axios.create({
-  baseURL: "http://cecan-app.tk:4000/api/v1",
+  baseURL: "https://cecan-app.tk:4000/api/v1",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${getAuthorizationHeader()}`,
