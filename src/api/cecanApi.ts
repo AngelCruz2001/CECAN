@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let token;
+let token = "";
 if (typeof window !== "undefined") {
   token = window.localStorage.getItem("token");
 }
@@ -13,7 +13,7 @@ export const getToken = () =>
 export const getAuthorizationHeader = () => `Bearer ${getToken()}`;
 
 export const cecanApiPDF = axios.create({
-  baseURL: "https://cecan-app.tk/api/v1",
+  baseURL: "https://staging-app.site/api/v1",
   headers: {
     responseType: "blob",
     // "Content-Type": "apllication/pdf",
@@ -22,7 +22,7 @@ export const cecanApiPDF = axios.create({
 });
 
 const cecanApi = axios.create({
-  baseURL: "https://cecan-app.tk/api/v1",
+  baseURL: "https://staging-app.site/api/v1",
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${getAuthorizationHeader()}`,

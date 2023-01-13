@@ -7,19 +7,29 @@ import {
 } from "../../interfaces/IDepartments.interface";
 import {
   addDepartment,
+  deleteRequestFixedAsset,
+  setActiveFixedRequest,
   setDepartments,
   setFixedAssets,
+  setFixedAssetsRequests,
 } from "./fixedAssetSlice";
 import {
   IFixedAsset,
+  IFixedAssetRequestResponse,
   IFixedAssetResponse,
+  IRequestIDResponse,
 } from "../../interfaces/IFixedAssest.interface";
 import moment from "moment";
 
 export const startGetDepartments = () => async (dispatch: Dispatch) => {
   const response = await cecanApi.get<IDepartments>("/departments?limit=100");
   const departments = response.data.data.departments;
-  dispatch(setDepartments(departments));
+  const departmentsDateFixed = departments.map((department) => {
+    department.created_at = moment(department.created_at).format("DD/MM/YYYY");
+    department.updated_at = moment(department.updated_at).format("DD/MM/YYYY");
+    return department;
+  });
+  dispatch(setDepartments(departmentsDateFixed));
 };
 
 export const startSetDepartments =
@@ -37,6 +47,7 @@ export const startSetDepartments =
             updated_at,
             deleted_at,
             floor_number,
+            resposible_user_id: null,
           })
         );
         return "Departamento agregado";
@@ -65,9 +76,7 @@ export const startGetFixedAssests = () => async (dispatch: Dispatch) => {
 };
 
 export const startAddingFixedAsset =
-  (fixedAsset: any) => async (dispatch: Dispatch) => {
-    console.log(fixedAsset);
-    console.log(fixedAsset.department_id);
+  (fixedAsset: any, resetForm: () => void) => async (dispatch: Dispatch) => {
     toast.promise(
       cecanApi.post(
         `/fixed_assets_requests/departments/${fixedAsset.department_id}`,
@@ -81,8 +90,65 @@ export const startAddingFixedAsset =
       ),
       {
         loading: "Agregando activo fijo",
-        success: "Activo fijo agregado",
-        error: "Error al agregar activo fijo",
+        success: () => {
+          resetForm();
+          return "Agregando activo fijo";
+        },
+        error: (error) => {
+          console.log(error);
+          return "Error al agregar activo fijo";
+        },
+      }
+    );
+  };
+
+export const startGetRequestFixedAssets = () => async (dispatch: Dispatch) => {
+  const response = await cecanApi.get<IFixedAssetRequestResponse>(
+    "/fixed_assets_requests"
+  );
+  const fixedAssets = response.data.data.fixed_assets_requests;
+  dispatch(setFixedAssetsRequests(fixedAssets));
+};
+
+export const startDeleteRequestFixedAsset =
+  (id: string) => async (dispatch: Dispatch) => {
+    toast.promise(cecanApi.delete(`/fixed_assets_requests/${id}`), {
+      loading: "Eliminando solicitud",
+      success: () => {
+        dispatch(deleteRequestFixedAsset(id));
+        return "Solicitud eliminada";
+      },
+      error: "Error al eliminar solicitud",
+    });
+  };
+
+export const startGetFixedAssetsRequestById =
+  (id: string) => async (dispatch: Dispatch) => {
+    toast.promise(
+      cecanApi.get<IRequestIDResponse>(`/fixed_assets_requests/${id}`),
+      {
+        loading: "Cargando solicitud",
+        success: (request) => {
+          dispatch(
+            setActiveFixedRequest(request.data.data.fixed_assets_request)
+          );
+          return "Solicitud cargada";
+        },
+        error: "Error al cargar solicitud",
+      }
+    );
+  };
+
+export const assignResponsibleDepartmentUser =
+  (departmentId: string, userId: string) => async (dispatch: Dispatch) => {
+    toast.promise(
+      cecanApi.put(`/departments/${departmentId}/users/${userId}`),
+      {
+        loading: "Asignando responsable",
+        success: () => {
+          return "Responsable asignado";
+        },
+        error: "Error al asignar responsable",
       }
     );
   };

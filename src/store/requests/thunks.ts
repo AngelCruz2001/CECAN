@@ -3,7 +3,13 @@ import { IRequestStoreHouseResponse } from "interfaces/IRequestStore.response.in
 import moment from "moment";
 import { toast } from "react-hot-toast";
 import { Dispatch } from "redux";
-import { setInventory, setRequests } from "./requests.slice";
+import {
+  setCategories,
+  setInventory,
+  setPresentations,
+  setRequests,
+  setUnits,
+} from "./requests.slice";
 import "moment/locale/es";
 import { IAlmacenListResponse } from "interfaces/IAlmacenListaResponse.response.interface";
 import { AppDispatch } from "../store";
@@ -50,3 +56,83 @@ export const startGetStorehouseList = () => async (dispatch: Dispatch) => {
     console.log(data);
   }
 };
+
+export const startGetUnitsStorehouse = () => async (dispatch: AppDispatch) => {
+  try {
+    const {
+      data: { data, ok },
+    } = await cecanApi.get("/storehouse_utilities/units");
+    if (ok) {
+      dispatch(setUnits(data.storehouse_utility_units));
+    }
+  } catch (error) {}
+};
+
+export const startGetCategoriesStorehouse =
+  () => async (dispatch: AppDispatch) => {
+    try {
+      const {
+        data: { data, ok },
+      } = await cecanApi.get("/storehouse_utilities/categories");
+      if (ok) {
+        dispatch(setCategories(data.storehouse_utility_categories));
+      }
+    } catch (error) {}
+  };
+
+export const startGetPresentationsStorehouse =
+  () => async (dispatch: AppDispatch) => {
+    try {
+      const {
+        data: { data, ok },
+      } = await cecanApi.get("/storehouse_utilities/presentations");
+      if (ok) {
+        dispatch(setPresentations(data.storehouse_utility_presentations));
+      }
+    } catch (error) {}
+  };
+
+export const startAddStorehouseUtility =
+  (values: any, resetForm: () => void) => async (dispatch: AppDispatch) => {
+    try {
+      toast.promise(cecanApi.post("/storehouse_utilities", values), {
+        loading: "Guardando...",
+        success: (data) => {
+          resetForm();
+          return "Guardado correctamente";
+        },
+        error: (error) => {
+          console.log(error);
+          return "Error al guardar";
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const startAddStockStorehouse =
+  (values: any, resetForm: () => void) => async (dispatch: AppDispatch) => {
+    toast.promise(
+      cecanApi.post(
+        `/storehouse_utilities/${values.key}/storehouse_inventory`,
+        {
+          ...values,
+          expires_at: moment(values.expires_at).format(
+            "YYYY-MM-DD[T]HH:mm:ssZ"
+          ),
+        }
+      ),
+      {
+        loading: "Guardando...",
+        success: (data) => {
+          resetForm();
+          return "Stock añadido correctamente";
+        },
+        error: (error) => {
+          console.log(error);
+          return "Error al guardar";
+        },
+      }
+    );
+  };

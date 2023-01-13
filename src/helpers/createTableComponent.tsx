@@ -11,7 +11,7 @@ import styles from "styles/modules/Components.module.scss";
 import { useState } from "react";
 import { Counter } from "components/counter/Counter";
 import { IOnClick } from "../interfaces/ITable.interface";
-import { Print } from "components";
+import { Print, SelectUser } from "components";
 
 interface TableComponentDetails extends IOnClick {
   type: string;
@@ -64,6 +64,10 @@ export const createTableComponent = (details: TableComponentDetails) => {
           Detalles
         </button>
       );
+
+    case "SELECT-USER":
+      return <SelectUser idDepartment={id} onClick={onClick!} />;
+
     default:
       return <div key={id}>{content}</div>;
   }

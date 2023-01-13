@@ -19,7 +19,10 @@ export const Input: FC<Props> = ({ name, placeholder, type, options }) => {
         placeholder={placeholder}
         {...field}
       >
-        <option value="Seleccione una opción" disabled />
+        <option value="" selected disabled>
+          Seleccione una opción
+        </option>
+
         {options?.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

@@ -10,7 +10,6 @@ type Props = {
 };
 
 export const SidebarItem: FC<Props> = ({ icon, text, path }) => {
-
   const router = useRouter();
 
   const currentPath = useMemo(() => router.pathname, [router.pathname]);
@@ -18,7 +17,6 @@ export const SidebarItem: FC<Props> = ({ icon, text, path }) => {
     router.push(path);
   };
   // Get current page
-
 
   return (
     <div

@@ -6,6 +6,7 @@ import { pharmacySlice } from "./pharmacy/pharmacySlice";
 import { recipesSlice } from "./recipes/recipesSlice";
 import { requestsSlice } from "./requests/requests.slice";
 import { uiSlice } from "./ui/uiSlice";
+import { usersSlice } from "./users/usersSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     storehouse: requestsSlice.reducer,
     fixedAsset: fixedAssetSlice.reducer,
     auth: authSlice.reducer,
+    users: usersSlice.reducer,
   },
 });
 

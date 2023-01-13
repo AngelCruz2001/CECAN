@@ -19,7 +19,7 @@ export const startGetPharmacyData = () => async (dispatch: Dispatch) => {
     } = await cecanApi.get<IPharmacyDataResponse>("/pharmacy_inventory");
     if (ok) {
       console.log(data.inventory);
-      if (data.inventory === null && data.inventory.length > 0) {
+      if (data.inventory === null) {
         toast.error("No hay inventario disponible");
       } else {
         const dataMedicines = [];
@@ -33,7 +33,7 @@ export const startGetPharmacyData = () => async (dispatch: Dispatch) => {
                 name: medicine.medicine.name,
                 lot_number: stock.lot_number,
                 pieces: stock.pieces_left,
-                expires_at: stock.expires_at,
+                expires_at: moment(stock.expires_at).format("DD/MM/YYYY"),
               };
               dataMedicines.push(medicineStock);
             });

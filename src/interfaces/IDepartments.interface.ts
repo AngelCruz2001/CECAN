@@ -15,6 +15,7 @@ export interface Department {
   created_at: string;
   updated_at: string;
   deleted_at: null;
+  resposible_user_id: string | null;
 }
 
 export enum FloorNumber {

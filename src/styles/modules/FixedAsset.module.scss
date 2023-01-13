@@ -1,0 +1,59 @@
+.container {
+}
+
+.item {
+    height: 4.5rem;
+    min-width: 60rem;
+    border-radius: 1rem;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    gap: 2rem;
+    &:hover {
+        box-shadow: 0 0.4rem 0.4rem 0.2rem rgba(0, 0, 0, 0.2);
+        background-color: #e5e5e5;
+    }
+}
+
+.active {
+    background-color: #e5e5e5;
+    box-shadow: 0 0.4rem 0.4rem 0.2rem rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        color: red;
+    }
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 50rem;
+    margin: 0 2rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.itemCard {
+    border: solid 1px #e5e5e5;
+    padding: 1rem;
+}

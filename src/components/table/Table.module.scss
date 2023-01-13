@@ -21,6 +21,11 @@
 .cell {
     font-size: variables.$h3-font-size;
     height: 3rem;
+    p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 }
 
 .body {

@@ -1,24 +1,7 @@
-import React, { useEffect } from "react";
-import { BaseStructure, Input, SubmitButton } from "components";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { useAppDispatch, useAppSelector } from "hooks/hooks";
-import {
-  startAddingFixedAsset,
-  startGetDepartments,
-} from "store/fixedAsset/thunks";
+const requestForm = (props: RequestFormProps) => {
 
-const AddFixedAsset = () => {
-  const dispatch = useAppDispatch();
-  const { departments } = useAppSelector((state) => state.fixedAsset);
-
-  useEffect(() => {
-    dispatch(startGetDepartments());
-  }, []);
-
-  return (
-    <BaseStructure pageName="Añadir nuevo stock">
-      <Formik
+    return (
+        <Formik
         initialValues={{
           key: "",
           description: "",
@@ -42,7 +25,8 @@ const AddFixedAsset = () => {
           // observation: Yup.string().required("Campo requerido"),
         })}
         onSubmit={(values, { resetForm }) => {
-          dispatch(startAddingFixedAsset(values, resetForm));
+          console.log("caca");
+          dispatch(startAddingFixedAsset(values));
         }}
       >
         {(formik) => (
@@ -76,8 +60,4 @@ const AddFixedAsset = () => {
           </>
         )}
       </Formik>
-    </BaseStructure>
-  );
-};
-
-export default AddFixedAsset;
+    )

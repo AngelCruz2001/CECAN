@@ -8,6 +8,7 @@ import Router from "next/router";
 import { toast } from "react-hot-toast";
 import { Dispatch } from "redux";
 import { login } from "./authSlice";
+import { useGetAccess } from "../../hooks/useGetAccess";
 
 export const startLogin = ({
   username,
@@ -24,10 +25,11 @@ export const startLogin = ({
   return async (dispatch: Dispatch) => {
     toast.promise(req, {
       loading: "Iniciando sesión...",
-      error: "Hubo un error al iniciar sesión",
+      error: (error) => {
+        console.log(error);
+        return "Hubo un error al iniciar sesión";
+      },
       success: ({ data: { data, ok } }: AxiosResponse<IAuthResponse>) => {
-        window.localStorage.setItem("token", data.token);
-
         dispatch(
           login({
             token: data.token,
@@ -41,7 +43,11 @@ export const startLogin = ({
             },
           })
         );
-        Router.push("/catalogoFarmacia");
+
+        window.localStorage.setItem("token", data.token);
+
+        const items = useGetAccess(data.user.role.name);
+        Router.push(`/${items[0].path}`);
         return `Bienvenido ${data.user.full_name}`;
       },
     });
@@ -64,6 +70,38 @@ export const renewToken = () => {
         );
         localStorage.setItem("token", data.token);
         return "Token renovado";
+      },
+    });
+  };
+};
+
+export const startSignUp = ({
+  name,
+  surname,
+  email,
+  password,
+  role_id,
+}: {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  role_id: string;
+}) => {
+  const req = cecanApi.post("/auth/signup", {
+    name,
+    surname,
+    email,
+    password,
+    role_id,
+  });
+
+  return async (dispatch: Dispatch) => {
+    toast.promise(req, {
+      loading: "Creando usuario...",
+      error: "Hubo un error al crear el usuario",
+      success: () => {
+        return "Usuario creado";
       },
     });
   };

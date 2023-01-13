@@ -50,10 +50,12 @@ export const startGetMedicines = () => async (dispatch: Dispatch) => {
 };
 
 export const startGetHistorialPrescriptions =
-  () => async (dispatch: Dispatch) => {
+  (id: string) => async (dispatch: Dispatch) => {
     const {
       data: { data, ok },
-    } = await cecanApi.get<IPrescriptionResponse>("/prescriptions");
+    } = await cecanApi.get<IPrescriptionResponse>(
+      `/prescriptions${id === "" ? "" : `?user_id=${id}`}`
+    );
 
     if (ok) {
       dispatch(

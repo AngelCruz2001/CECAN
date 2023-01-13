@@ -1,11 +1,13 @@
 import { IAlmacen, IAlmacenStore } from "./IAlmacen.interface";
 import { IHistorial, IPrescriptionHistory } from "./IHistorial.interface";
 import { IFixedAsset } from "./IFixedAssest.interface";
+import { IDepartment, Department } from "./IDepartments.interface";
 import {
   IMedicineStock,
   IMedicine,
   IMedicineCatalog,
 } from "./IMedicineStock.interface";
+import { User } from "./IUser.interface";
 
 export interface ITable extends IOnClick {
   headers: ITHeaders[];
@@ -17,6 +19,8 @@ export interface ITable extends IOnClick {
     | IAlmacen[]
     | IAlmacenStore[]
     | IFixedAsset[]
+    | Department[]
+    | User[]
     | null;
   percentages: number[];
   keyName?: "id" | "folio" | "key";
@@ -32,7 +36,9 @@ interface ITHeaders {
     | keyof IPrescriptionHistory
     | keyof IAlmacenStore
     | keyof IFixedAsset
-    | HeadersButtons;
+    | keyof Department
+    | HeadersButtons
+    | keyof User;
   label: string;
 }
 

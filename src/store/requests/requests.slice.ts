@@ -5,12 +5,20 @@ import {
 } from "interfaces/IMedicineStock.interface";
 import { ITable } from "interfaces/ITable.interface";
 import { dataPharmacy } from "resources/data";
-import { IAlmacen, IAlmacenStore } from "../../interfaces/IAlmacen.interface";
+import { IStorehouseUtility } from "../../interfaces/IAlmacen.interface";
+import {
+  IAlmacen,
+  IAlmacenStore,
+  IStorehouseUtility,
+} from "../../interfaces/IAlmacen.interface";
 
 export interface IRequestsState {
   requests: IAlmacen[] | null;
   activeRequest: IAlmacen | null;
   inventory: IAlmacenStore[] | null;
+  units: IStorehouseUtility[] | null;
+  categories: IStorehouseUtility[] | null;
+  presentations: IStorehouseUtility[] | null;
   loading: boolean;
 }
 
@@ -18,6 +26,9 @@ const initialState: IRequestsState = {
   requests: null,
   activeRequest: null,
   inventory: null,
+  units: null,
+  categories: null,
+  presentations: null,
   loading: false,
 };
 
@@ -33,9 +44,25 @@ export const requestsSlice = createSlice({
     },
     setInventory: (state, action: PayloadAction<IAlmacenStore[]>) => {
       state.inventory = action.payload;
-    }
+    },
+    setUnits: (state, action: PayloadAction<IStorehouseUtility[]>) => {
+      state.units = action.payload;
+    },
+    setCategories: (state, action: PayloadAction<IStorehouseUtility[]>) => {
+      state.categories = action.payload;
+    },
+    setPresentations: (state, action: PayloadAction<IStorehouseUtility[]>) => {
+      state.presentations = action.payload;
+    },
   },
   extraReducers: (builder) => {},
 });
 
-export const { setActiveRequest, setRequests, setInventory } = requestsSlice.actions;
+export const {
+  setActiveRequest,
+  setRequests,
+  setInventory,
+  setUnits,
+  setCategories,
+  setPresentations,
+} = requestsSlice.actions;

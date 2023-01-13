@@ -11,3 +11,9 @@ export interface IAlmacenStore {
   presentation: string;
   quantity_per_unit: number;
 }
+
+
+export interface IStorehouseUtility { 
+  id: string; 
+  name: string;
+}
