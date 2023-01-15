@@ -5,7 +5,6 @@ import {
 } from "interfaces/IMedicineStock.interface";
 import { ITable } from "interfaces/ITable.interface";
 import { dataPharmacy } from "resources/data";
-import { IStorehouseUtility } from "../../interfaces/IAlmacen.interface";
 import {
   IAlmacen,
   IAlmacenStore,

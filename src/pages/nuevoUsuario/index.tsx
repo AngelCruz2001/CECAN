@@ -4,17 +4,16 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import styles from "styles/modules/AddStock.module.scss";
 import { useAppDispatch, useAppSelector } from "hooks/hooks";
-import { startAddStock } from "../../store/pharmacy/thunks";
 import { useEffect } from "react";
 import { startGetRoles } from "store/users/thunks";
 import { startSignUp } from "../../store/auth/thunks";
-const nuevoUsuario = () => {
+const NuevoUsuario = () => {
   const dispatch = useAppDispatch();
   const { roles } = useAppSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(startGetRoles());
-  }, []);
+  }, [dispatch]);
 
   return (
     <BaseStructure pageName="Añadir nuevo usuario">
@@ -68,4 +67,4 @@ const nuevoUsuario = () => {
   );
 };
 
-export default nuevoUsuario;
+export default NuevoUsuario;

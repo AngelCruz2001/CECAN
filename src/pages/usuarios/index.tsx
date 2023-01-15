@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { NextPage } from "next";
 import styles from "styles/modules/GenerateRecipe.module.scss";
 import { Sidebar, Table, TitleScreen, TopBar } from "components";
-import { ITable } from "../../interfaces/ITable.interface";
+import { ITable } from '../../interfaces/ITable.interface';
 import { useAppDispatch, useAppSelector } from "hooks/hooks";
 import { startGetStorehouseList } from "../../store/requests/thunks";
 import { startGetUsers } from "store/users/thunks";
@@ -15,18 +15,14 @@ const Users: NextPage = () => {
   useEffect(() => {
     dispatch(startGetUsers());
   }, []);
-  console.log(users);
 
-  email: "admin@cecan.com";
-  full_name: "CECAN ADMIN super";
-  id: "CAN100848";
   const tableElements: ITable = {
     headers: [
       { id: "id", label: "ID" },
       { id: "email", label: "Correo electrónico" },
       { id: "full_name", label: "Nombre" },
     ],
-    rows: users,
+    rows: users as ITable["rows"],
     percentages: [25, 45, 30],
     textDisplay: ["center", "center", "center"],
     elements: ["text", "text", "text", "text"],

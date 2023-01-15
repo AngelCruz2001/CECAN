@@ -23,7 +23,7 @@ const Historial: NextPage = () => {
 
   useEffect(() => {
     dispatch(startGetHistorialPrescriptions());
-  }, []);
+  }, [dispatch]);
 
   const tableElements: ITable = {
     headers: [

@@ -12,7 +12,7 @@ import { User } from "./IUser.interface";
 export interface ITable extends IOnClick {
   headers: ITHeaders[];
   rows:
-    | IMedicineStock[]
+    | User[]
     | IMedicine[]
     | IMedicineCatalog[]
     | IPrescriptionHistory[]
@@ -20,7 +20,7 @@ export interface ITable extends IOnClick {
     | IAlmacenStore[]
     | IFixedAsset[]
     | Department[]
-    | User[]
+    | IMedicineStock[]
     | null;
   percentages: number[];
   keyName?: "id" | "folio" | "key";
@@ -37,6 +37,7 @@ interface ITHeaders {
     | keyof IAlmacenStore
     | keyof IFixedAsset
     | keyof Department
+    | keyof User
     | HeadersButtons
     | keyof User;
   label: string;

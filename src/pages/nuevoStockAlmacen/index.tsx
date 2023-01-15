@@ -37,7 +37,7 @@ const AddStockStorehouse = () => {
                 name="key"
                 placeholder="Clave de la medicina"
                 type="select"
-                options={inventory.map((item) => ({
+                options={inventory?.map((item) => ({
                   value: item.key,
                   label: item.genericName,
                 }))}
