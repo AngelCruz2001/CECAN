@@ -16,7 +16,7 @@ import { URL } from "url";
 export const startGenerateRecipe =
   ({ patient_name, instructions, observations, medicines }: IPrescription) =>
   async (dispatch: Dispatch) => {
-    const res = await fetch("https://cecan-app.tk/api/v1/prescriptions", {
+    const res = await fetch("https://staging-app.site/api/v1/prescriptions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
