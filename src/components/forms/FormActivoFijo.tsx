@@ -36,7 +36,7 @@ export const FormActivoFijo = ({ departments, data, setData }) => {
         department_id: Yup.string()
           .required("Campo requerido")
           .oneOf(
-            data[0]?.department_id
+            data.length > 0 && data[0].department_id
               ? [data[0].department_id]
               : departments?.map((department) => department.id),
             "Los activos fijos deben pertenecer al mismo departamento"
