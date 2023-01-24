@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { BaseStructure } from "components";
+import { BaseStructure, FormActivoFijo } from "components";
 import { useAppDispatch, useAppSelector } from "hooks/hooks";
-import { FormActivoFijo } from "./FormActivoFijo";
 import {
   startAddingFixedAsset,
   startGetDepartments,
@@ -30,14 +29,14 @@ const AddFixedAsset = () => {
           setData={setdataForms}
         />
 
-        {dataForms.map((dataForm) => (
+        {dataForms?.map((dataForm) => (
           <div className={styles.data} key={dataForm.key}>
             <h2>{dataForm.key}</h2>
             <p>{dataForm.description}</p>
           </div>
         ))}
 
-        {dataForms.length > 0 && (
+        {dataForms?.length > 0 && (
           <button
             className={styles.button}
             onClick={() => {

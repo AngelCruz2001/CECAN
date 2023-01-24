@@ -3,7 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styles from "styles/modules/Components.module.scss";
 
-export const Print = ({ id, onClick }: { id: string; onClick: () => void }) => {
+export const Print = ({
+  id,
+  onClick,
+}: {
+  id: string;
+  onClick?: () => void;
+}) => {
   const handlePrint = () => {
     onClick();
   };
