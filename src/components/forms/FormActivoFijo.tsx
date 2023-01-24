@@ -1,11 +1,9 @@
 import { Input, SubmitButton } from "components";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { startAddingFixedAsset } from "store/fixedAsset/thunks";
-import { useAppDispatch } from "hooks/hooks";
 
 export const FormActivoFijo = ({ departments, data, setData }) => {
-  const dispatch = useAppDispatch();
+  if (!departments) return null;
 
   return (
     <Formik
@@ -36,8 +34,10 @@ export const FormActivoFijo = ({ departments, data, setData }) => {
         department_id: Yup.string()
           .required("Campo requerido")
           .oneOf(
-            data.length > 0 && data[0].department_id
-              ? [data[0].department_id]
+            data.length > 0
+              ? data[0].department_id
+                ? [data[0].department_id]
+                : departments?.map((department) => department.id)
               : departments?.map((department) => department.id),
             "Los activos fijos deben pertenecer al mismo departamento"
           ),
