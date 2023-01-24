@@ -9,6 +9,7 @@ import {
   startGetDepartments,
   startGetFixedAssetsRequestById,
   startGetRequestFixedAssets,
+  startPrintingFixedReport,
 } from "store/fixedAsset/thunks";
 import styles from "styles/modules/FixedAsset.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,6 +20,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { clearActiveFixedRequest } from "store/fixedAsset/fixedAssetSlice";
+import { Print } from "../../components/print/Print";
 
 const FixedAssetRequests = () => {
   const dispatch = useAppDispatch();
@@ -39,6 +41,10 @@ const FixedAssetRequests = () => {
 
   const handleActiveRequest = (id: string) => {
     dispatch(startGetFixedAssetsRequestById(id));
+  };
+
+  const handlePrint = () => {
+    dispatch(startPrintingFixedReport(activeRequest?.id));
   };
 
   return (
@@ -65,6 +71,8 @@ const FixedAssetRequests = () => {
 
       {activeRequest && (
         <div className={styles.card}>
+          <Print id={activeRequest.id} onClick={handlePrint} />
+
           {activeRequest?.fixed_assets.map(({ id, details }) => (
             <div className={styles.itemCard} key={id}>
               <h2>Clave: </h2>

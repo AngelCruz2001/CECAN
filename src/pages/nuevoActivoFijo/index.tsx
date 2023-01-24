@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { BaseStructure, Input, SubmitButton } from "components";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React, { useEffect, useState } from "react";
+import { BaseStructure } from "components";
 import { useAppDispatch, useAppSelector } from "hooks/hooks";
+import { FormActivoFijo } from "./FormActivoFijo";
 import {
   startAddingFixedAsset,
   startGetDepartments,
 } from "store/fixedAsset/thunks";
+
+import styles from "styles/modules/AddFixedAsset.module.scss";
 
 const AddFixedAsset = () => {
   const dispatch = useAppDispatch();
@@ -16,66 +17,38 @@ const AddFixedAsset = () => {
     dispatch(startGetDepartments());
   }, []);
 
+  const [dataForms, setdataForms] = useState([]);
+
+  const resetData = () => setdataForms([]);
+
   return (
     <BaseStructure pageName="Añadir nuevo stock">
-      <Formik
-        initialValues={{
-          key: "",
-          description: "",
-          brand: "",
-          model: "",
-          series: "",
-          type: "",
-          physical_state: "",
-          observation: "",
-          department_id: "",
-        }}
-        validationSchema={Yup.object({
-          // key: Yup.string().required("Campo requerido"),
-          // description: Yup.string().required("Campo requerido"),
-          // brand: Yup.string().required("Campo requerido"),
-          // model: Yup.string().required("Campo requerido"),
-          // series: Yup.string().required("Campo requerido"),
-          // type: Yup.string().required("Campo requerido"),
-          // physical_state: Yup.string().required("Campo requerido"),
-          // department_id: Yup.string().required("Campo requerido"),
-          // observation: Yup.string().required("Campo requerido"),
-        })}
-        onSubmit={(values, { resetForm }) => {
-          dispatch(startAddingFixedAsset(values, resetForm));
-        }}
-      >
-        {(formik) => (
-          <>
-            <form onSubmit={formik.handleSubmit}>
-              <Input name="key" placeholder="Clave" type="text" />
-              <Input name="description" placeholder="Descripción" type="text" />
-              <Input name="brand" placeholder="Marca" type="text" />
-              <Input name="model" placeholder="Modelo" type="text" />
-              <Input name="series" placeholder="Serie" type="text" />
-              <Input name="type" placeholder="Tipo" type="text" />
-              <Input
-                name="physical_state"
-                placeholder="Estado físico"
-                type="text"
-              />
-              <Input
-                name="department_id"
-                placeholder="Departamento"
-                type="select"
-                options={
-                  departments?.map((department) => ({
-                    value: department.id,
-                    label: department.name,
-                  })) || []
-                }
-              />
+      <div className={styles.container}>
+        <FormActivoFijo
+          departments={departments}
+          data={dataForms}
+          setData={setdataForms}
+        />
 
-              <SubmitButton text="Añadir activo fijo" />
-            </form>
-          </>
+        {dataForms.map((dataForm) => (
+          <div className={styles.data} key={dataForm.key}>
+            <h2>{dataForm.key}</h2>
+            <p>{dataForm.description}</p>
+          </div>
+        ))}
+
+        {dataForms.length > 0 && (
+          <button
+            className={styles.button}
+            onClick={() => {
+              resetData();
+              dispatch(startAddingFixedAsset(dataForms));
+            }}
+          >
+            Guardar
+          </button>
         )}
-      </Formik>
+      </div>
     </BaseStructure>
   );
 };

@@ -20,6 +20,7 @@ import {
   IRequestIDResponse,
 } from "../../interfaces/IFixedAssest.interface";
 import moment from "moment";
+import download from "downloadjs";
 
 export const startGetDepartments = () => async (dispatch: Dispatch) => {
   const response = await cecanApi.get<IDepartments>("/departments?limit=100");
@@ -76,23 +77,20 @@ export const startGetFixedAssests = () => async (dispatch: Dispatch) => {
 };
 
 export const startAddingFixedAsset =
-  (fixedAsset: any, resetForm: () => void) => async (dispatch: Dispatch) => {
+  (dataFixedAssets: any) => async (dispatch: Dispatch) => {
     toast.promise(
       cecanApi.post(
-        `/fixed_assets_requests/departments/${fixedAsset.department_id}`,
+        `/fixed_assets_requests/departments/${dataFixedAssets[0].department_id}`,
         {
-          fixed_assets: [
-            {
-              details: fixedAsset,
-            },
-          ],
+          fixed_assets: dataFixedAssets?.map((fixedAsset) => ({
+            details: fixedAsset,
+          })),
         }
       ),
       {
         loading: "Agregando activo fijo",
         success: () => {
-          resetForm();
-          return "Agregando activo fijo";
+          return "Activo fijo agregado";
         },
         error: (error) => {
           console.log(error);
@@ -151,4 +149,23 @@ export const assignResponsibleDepartmentUser =
         error: "Error al asignar responsable",
       }
     );
+  };
+
+export const startPrintingFixedReport =
+  (id: string) => async (dispatch: Dispatch) => {
+    console.log("caca");
+    const res = await fetch(
+      `https://staging-app.site/api/v1/fixed_assets_requests/${id}/?pdf=true`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const blob = await res.blob();
+
+    download(blob, "Reporte Activo Fijo.pdf", "application/pdf");
   };

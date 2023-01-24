@@ -15,7 +15,7 @@ const FixedAsset = () => {
 
   const tableElements: ITable = {
     headers: [
-      { id: "id", label: "Etiqueta o clave" },
+      { id: "key", label: "Etiqueta o clave" },
       { id: "description", label: "Descripción" },
       { id: "model", label: "Modelo" },
       { id: "brand", label: "Marca" },
